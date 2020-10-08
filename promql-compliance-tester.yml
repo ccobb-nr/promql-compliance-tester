@@ -16,7 +16,8 @@ test_target_config:
   #
   # UNCOMMENT FOR NEW RELIC, replacing <insights_query_api_key>
   # query_url: https://prometheus-api.newrelic.com
-  # x_query_key: <insights_query_api_key>
+  # headers:
+  #   X-Query-Key: <insights_query_api_key>
 
 query_tweaks:
   # UNCOMMENT FOR CORTEX:
