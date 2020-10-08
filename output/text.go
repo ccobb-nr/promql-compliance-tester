@@ -11,12 +11,16 @@ import (
 // Text produces text-based output for a number of query results.
 func Text(results []*comparer.Result, includePassing bool, tweaks []*config.QueryTweak) {
 	successes := 0
+	unsupported := 0
 	for _, res := range results {
 		if res.Success() {
 			successes++
 			if !includePassing {
 				continue
 			}
+		}
+		if res.Unsupported {
+			unsupported++
 		}
 
 		fmt.Println(strings.Repeat("-", 80))
@@ -49,5 +53,6 @@ func Text(results []*comparer.Result, includePassing bool, tweaks []*config.Quer
 		fmt.Println("* ", t.Note)
 	}
 	fmt.Println(strings.Repeat("=", 80))
-	fmt.Printf("Total: %d / %d (%.2f%%) passed\n", successes, len(results), 100*float64(successes)/float64(len(results)))
+	fmt.Printf("Total: %d / %d (%.2f%%) passed, Unsupported: %d / %d (%.2f%%)\n", successes, len(results), 100*float64(successes)/float64(len(results)),
+		unsupported, len(results), 100*float64(unsupported)/float64(len(results)))
 }
