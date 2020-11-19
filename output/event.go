@@ -36,15 +36,15 @@ func Event(results []*comparer.Result, includePassing bool, tweaks []*config.Que
 
 	testId := uuid.New()
 	testTimeStamp := time.Now()
-	insightsUrl := os.Getenv("INSIGHTS_URL")
-	insertKey := os.Getenv("INSERT_KEY")
+	insightsCollectorUrl := os.Getenv("INSIGHTS_COLLECTOR_URL")
+	insightsInsertKey := os.Getenv("INSIGHTS_INSERT_KEY")
 
-	if len(insightsUrl) <= 0 {
-		fmt.Printf("Need to set INSIGHTS_URL")
+	if len(insightsCollectorUrl) <= 0 {
+		fmt.Printf("Need to set INSIGHTS_COLLECTOR_URL")
 		return
 	}
-	if len(insertKey) <= 0 {
-		fmt.Printf("Need to set INSERT_KEY")
+	if len(insightsInsertKey) <= 0 {
+		fmt.Printf("Need to set INSIGHTS_INSERT_KEY")
 		return
 	}
 
@@ -102,8 +102,8 @@ func Event(results []*comparer.Result, includePassing bool, tweaks []*config.Que
 		}
 
 		jsonResults, _ := json.Marshal(testResults)
-		req, _ := http.NewRequest("POST", insightsUrl, bytes.NewBuffer(jsonResults))
-		req.Header.Add("X-Insert-Key", insertKey)
+		req, _ := http.NewRequest("POST", insightsCollectorUrl, bytes.NewBuffer(jsonResults))
+		req.Header.Add("X-Insert-Key", insightsInsertKey)
 		resp, _ := http.DefaultClient.Do(req)
 		responses = append(responses, InsightsResponse{
 			TestCase: res.TestCase.Query,
