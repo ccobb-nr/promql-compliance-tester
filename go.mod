@@ -6,6 +6,7 @@ require (
 	github.com/cheggaaa/pb/v3 v3.0.5
 	github.com/fatih/color v1.9.0 // indirect
 	github.com/google/go-cmp v0.5.2
+	github.com/google/uuid v1.0.0
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/pkg/errors v0.9.1

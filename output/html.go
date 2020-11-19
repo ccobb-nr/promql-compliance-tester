@@ -48,7 +48,7 @@ func HTML(tplFile string) (Outputter, error) {
 		return nil, errors.Wrapf(err, "parsing template file %q", tplFile)
 	}
 
-	return func(results []*comparer.Result, includePassing bool, tweaks []*config.QueryTweak) {
+	return func(results []*comparer.Result, includePassing bool, tweaks []*config.QueryTweak, cfg *config.Config) {
 		err := t.Execute(os.Stdout, struct {
 			Results        []*comparer.Result
 			includePassing bool

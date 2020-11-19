@@ -9,7 +9,7 @@ import (
 )
 
 // JSON produces JSON-based output for a number of query results.
-func JSON(results []*comparer.Result, includePassing bool, tweaks []*config.QueryTweak) {
+func JSON(results []*comparer.Result, includePassing bool, tweaks []*config.QueryTweak, cfg *config.Config) {
 	buf, err := json.Marshal(map[string]interface{}{
 		"totalResults":   len(results), // Needed because we may exclude passing results.
 		"results":        results,

@@ -7,7 +7,7 @@ import (
 )
 
 // TSV produces tab separated values output for a number of query results.
-func TSV(results []*comparer.Result, passing bool, tweaks []*config.QueryTweak) {
+func TSV(results []*comparer.Result, passing bool, tweaks []*config.QueryTweak, cfg *config.Config) {
 	successes := 0
 	unsupported := 0
 

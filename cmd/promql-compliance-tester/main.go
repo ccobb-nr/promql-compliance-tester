@@ -51,6 +51,8 @@ func main() {
 	outputPassing := flag.Bool("output-passing", false, "Whether to also include passing test cases in the output.")
 	flag.Parse()
 
+	cfg, err := config.LoadFromFile(*configFile)
+
 	var outp output.Outputter
 	switch *outputFormat {
 	case "text":
@@ -65,11 +67,12 @@ func main() {
 		outp = output.JSON
 	case "tsv":
 		outp = output.TSV
+	case "event":
+		outp = output.Event
 	default:
 		log.Fatalf("Invalid output format %q", *outputFormat)
 	}
 
-	cfg, err := config.LoadFromFile(*configFile)
 	if err != nil {
 		log.Fatalf("Error loading configuration file: %v", err)
 	}
@@ -107,5 +110,5 @@ func main() {
 	}
 	progressBar.Finish()
 
-	outp(results, *outputPassing, cfg.QueryTweaks)
+	outp(results, *outputPassing, cfg.QueryTweaks, cfg)
 }

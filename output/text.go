@@ -9,7 +9,7 @@ import (
 )
 
 // Text produces text-based output for a number of query results.
-func Text(results []*comparer.Result, includePassing bool, tweaks []*config.QueryTweak) {
+func Text(results []*comparer.Result, includePassing bool, tweaks []*config.QueryTweak, cfg *config.Config) {
 	successes := 0
 	unsupported := 0
 	for _, res := range results {
