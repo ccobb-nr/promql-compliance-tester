@@ -112,13 +112,20 @@ func Event(results []*comparer.Result, includePassing bool, tweaks []*config.Que
 		})
 	}
 
+	buildFailed := false
+
 	for _, insightsResponse := range responses {
 		if insightsResponse.Response.StatusCode >= 300 || insightsResponse.Response.StatusCode < 200 {
 			fmt.Printf("Failed to POST testcase <%s>. Response <%d>, <%s>.\n", insightsResponse.TestCase, insightsResponse.Response.StatusCode, insightsResponse.Response.Status)
+			buildFailed = true
 		}
 	}
 
 	fmt.Println(strings.Repeat("=", 80))
 	fmt.Printf("Test Run ID: %s\n", testId)
 	fmt.Printf("Total: %d / %d (%.2f%%) passed, %d unsupported\n", successes, len(results), 100*float64(successes)/float64(len(results)), unsupported)
+
+	if buildFailed {
+		os.Exit(1)
+	}
 }
