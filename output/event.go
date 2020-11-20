@@ -38,7 +38,7 @@ func Event(results []*comparer.Result, includePassing bool, tweaks []*config.Que
 	testTimeStamp := time.Now()
 	insightsCollectorUrl := os.Getenv("INSIGHTS_COLLECTOR_URL")
 	insightsInsertKey := os.Getenv("INSIGHTS_INSERT_KEY")
-	eventType := os.Getenv("FROM PROMQL_COMPLIANCE_EVENT_TYPE")
+	eventType := os.Getenv("PROMQL_COMPLIANCE_EVENT_TYPE")
 
 	if len(insightsCollectorUrl) <= 0 {
 		fmt.Printf("Need to set INSIGHTS_COLLECTOR_URL")
